@@ -1,1 +1,236 @@
-#hello
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Protocol: Null | Secure Gateway</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Roboto+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #0d1117;
+            --surface: #161b22;
+            --primary: #58a6ff;
+            --secondary: #66fcf1;
+            --danger: #f85149;
+            --success: #3fb950;
+            --text: #c9d1d9;
+            --border: #30363d;
+        }
+        * { margin:0; padding:0; box-sizing:border-box; }
+        
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: 'Roboto Mono', monospace;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(88, 166, 255, 0.1) 0%, transparent 20%),
+                radial-gradient(circle at 90% 80%, rgba(248, 81, 73, 0.1) 0%, transparent 20%);
+        }
+
+        .login-container {
+            position: relative;
+            width: 100%;
+            max-width: 480px;
+        }
+
+        .card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.6);
+            overflow: hidden;
+            position: relative;
+        }
+
+        .terminal-header {
+            background: #090c10;
+            padding: 10px 20px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.75rem;
+            color: #8b949e;
+            letter-spacing: 1px;
+        }
+
+        .status-light {
+            width: 8px;
+            height: 8px;
+            background: var(--danger);
+            border-radius: 50%;
+            box-shadow: 0 0 8px var(--danger);
+            animation: pulse 2s infinite;
+        }
+
+        .card-body {
+            padding: 40px;
+            text-align: center;
+        }
+
+        h1 {
+            font-family: 'Orbitron', sans-serif;
+            color: white;
+            font-size: 2rem;
+            margin-bottom: 5px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-shadow: 0 0 15px rgba(88, 166, 255, 0.3);
+        }
+
+        .subtitle {
+            color: var(--primary);
+            font-size: 0.8rem;
+            margin-bottom: 40px;
+            letter-spacing: 1.5px;
+            opacity: 0.8;
+        }
+
+        .input-group {
+            margin-bottom: 25px;
+            text-align: left;
+            opacity: 0.5;
+            position: relative;
+        }
+
+        label {
+            display: block;
+            font-size: 0.75rem;
+            margin-bottom: 8px;
+            color: var(--text);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        input {
+            width: 100%;
+            padding: 14px;
+            background: #0d1117;
+            border: 1px solid var(--border);
+            color: var(--text);
+            font-family: 'Roboto Mono', monospace;
+            border-radius: 4px;
+            cursor: not-allowed;
+        }
+
+        .lock-icon {
+            position: absolute;
+            right: 15px;
+            top: 38px;
+            font-size: 0.9rem;
+            color: var(--danger);
+        }
+
+        .btn-disabled {
+            width: 100%;
+            padding: 15px;
+            background: rgba(248, 81, 73, 0.1);
+            border: 1px solid var(--danger);
+            color: var(--danger);
+            font-family: 'Orbitron', sans-serif;
+            font-weight: bold;
+            font-size: 0.9rem;
+            cursor: not-allowed;
+            margin-top: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .emergency-override {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px dashed var(--border);
+        }
+
+        .override-link {
+            display: inline-block;
+            color: var(--success);
+            text-decoration: none;
+            font-size: 0.9rem;
+            border: 1px solid transparent;
+            padding: 10px 20px;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+            background: rgba(63, 185, 80, 0.05);
+        }
+
+        .override-link:hover {
+            border-color: var(--success);
+            background: rgba(63, 185, 80, 0.15);
+            box-shadow: 0 0 15px rgba(63, 185, 80, 0.2);
+            text-shadow: 0 0 5px var(--success);
+        }
+
+        .footer-status {
+            margin-top: 15px;
+            font-size: 0.7rem;
+            color: #8b949e;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 0.5; }
+            50% { opacity: 1; }
+            100% { opacity: 0.5; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="login-container">
+        <div class="card">
+            <div class="terminal-header">
+                <span>GATEWAY_V4.2 // PROTOCOL: NULL</span>
+                <div style="display:flex; align-items:center; gap:8px;">
+                    <span>LOCKED</span>
+                    <div class="status-light"></div>
+                </div>
+            </div>
+
+            <div class="card-body">
+                <h1>Protocol: Null</h1>
+                <div class="subtitle">INTERNAL ACCESS PORTAL</div>
+
+                <form>
+                    <div class="input-group">
+                        <label>Identity Hash</label>
+                        <input type="text" value="USER_UNKNOWN" disabled>
+                        <span class="lock-icon">🔒</span>
+                    </div>
+
+                    <div class="input-group">
+                        <label>Security Token</label>
+                        <input type="password" value="••••••••••••••" disabled>
+                        <span class="lock-icon">🔒</span>
+                    </div>
+
+                    <button class="btn-disabled" type="button">
+                        <span>⚠ Access Restricted</span>
+                    </button>
+                </form>
+
+                <div class="emergency-override">
+                    <p style="margin-bottom:10px; font-size:0.8rem; color:var(--text);">
+                        [DEBUG MODE DETECTED]
+                    </p>
+                    <a href="/login/guest" class="override-link">
+                        &gt; INITIATE GUEST PROTOCOL
+                    </a>
+                </div>
+                
+                <div class="footer-status">
+                    Encryption: 256-bit AES // Server: ONLINE
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
