@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Access Denied — Protocol: Null</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Roboto+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+    /* ... (Same CSS as before) ... */
+    :root {
+        --bg: #0d1117;
+        --surface: #161b22;
+        --primary: #58a6ff;
+        --danger: #f85149;
+        --text: #c9d1d9;
+        --text-muted: #8b949e;
+        --border: #30363d;
+    }
+    * { margin:0; padding:0; box-sizing:border-box; }
+    
+    body {
+        background: var(--bg);
+        color: var(--text);
+        font-family: 'Roboto Mono', monospace;
+        height: 100vh;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        background-image: 
+            radial-gradient(circle at 10% 20%, rgba(88, 166, 255, 0.15) 0%, transparent 20%),
+            radial-gradient(circle at 90% 80%, rgba(248, 81, 73, 0.15) 0%, transparent 20%);
+    }
+
+    .navbar {
+        position: absolute;
+        top: 0; left: 0; right: 0;
+        background: rgba(13, 17, 23, 0.95);
+        border-bottom: 1px solid var(--border);
+        padding: 15px 0;
+        z-index: 1000;
+    }
+    .nav-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 30px;
+    }
+    .logo {
+        font-family: 'Orbitron', sans-serif;
+        font-size: 1.1rem;
+        color: var(--primary);
+        letter-spacing: 1px;
+    }
+    .credits {
+        background: linear-gradient(135deg, #f5c200, #ffa500);
+        color: #0d1117;
+        padding: 4px 12px;
+        border-radius: 50px;
+        font-weight: bold;
+        font-size: 0.8rem;
+        box-shadow: 0 0 15px rgba(255, 193, 7, 0.4);
+    }
+
+    .container {
+        width: 100%;
+        max-width: 500px;
+        padding: 0 20px;
+        position: relative;
+        z-index: 1;
+        margin-top: 40px;
+    }
+
+    .card {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 20px 50px rgba(0,0,0,0.8);
+    }
+
+    .header {
+        background: linear-gradient(135deg, #f85149, #da3633);
+        padding: 15px 20px;
+        text-align: center;
+    }
+    
+    .header h1 {
+        font-family: 'Orbitron', sans-serif;
+        font-size: 1.8rem;
+        margin: 0;
+        color: white;
+        text-shadow: 0 0 10px rgba(0,0,0,0.3);
+    }
+    
+    .header .code {
+        font-size: 0.8rem;
+        margin-top: 4px;
+        color: rgba(255,255,255,0.9);
+        font-weight: bold;
+    }
+
+    .body {
+        padding: 25px;
+    }
+
+    .status {
+        font-size: 0.85rem;
+        margin-bottom: 20px;
+        padding: 12px;
+        background: rgba(248,81,73,0.1);
+        border-left: 3px solid var(--danger);
+        color: var(--danger);
+        line-height: 1.4;
+    }
+
+    .info-grid {
+        display: grid;
+        grid-template-columns: max-content 1fr;
+        gap: 6px 15px;
+        margin: 15px 0;
+        font-size: 0.8rem;
+        padding-bottom: 15px;
+        border-bottom: 1px solid var(--border);
+        font-family: 'Roboto Mono', monospace;
+    }
+    
+    .label {
+        color: var(--primary);
+        font-weight: bold;
+        opacity: 0.8;
+    }
+
+    .hint-section {
+        margin-top: 15px;
+    }
+    
+    .hint-btn {
+        width: 100%;
+        background: linear-gradient(135deg, #238636, #3fb950);
+        color: white;
+        border: none;
+        padding: 10px;
+        border-radius: 6px;
+        font-family: 'Roboto Mono', monospace;
+        font-weight: bold;
+        font-size: 0.85rem;
+        cursor: pointer;
+        transition: all 0.2s;
+    }
+    
+    .hint-btn:hover { transform: translateY(-1px); }
+    .hint-btn:disabled { background: #30363d; cursor: not-allowed; transform: none; color: #8b949e; }
+
+    #hint-output {
+        margin-top: 10px;
+        font-size: 0.8rem;
+        max-height: 100px;
+        overflow-y: auto;
+    }
+    
+    #hint-output::-webkit-scrollbar { width: 4px; }
+    #hint-output::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+
+    .footer {
+        text-align: center;
+        margin-top: 20px;
+    }
+    
+    .back-btn {
+        color: var(--text-muted);
+        text-decoration: none;
+        font-size: 0.75rem;
+        transition: 0.3s;
+    }
+    .back-btn:hover { color: var(--primary); }
+</style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">Protocol: Null | Gateway</div>
+            <div class="credits" id="credit-display">Credits: 100</div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="card">
+            <div class="header">
+                <h1>ACCESS DENIED</h1>
+                <div class="code">ERROR 403 — FORBIDDEN</div>
+            </div>
+            
+            <div class="body">
+                <div class="status">
+                    <strong>SECURITY ALERT:</strong> The system denied your request because your current identity credentials do not hold administrative privileges.
+                </div>
+
+                <div class="info-grid">
+                    <div class="label">Protocol:</div> <div>RFC-7519 (Standard)</div>
+                    <div class="label">Error Code:</div> <div>0xAD_INVALID_SIG</div>
+                    <div class="label">Timestamp:</div> <div><script>document.write(new Date().toLocaleTimeString())</script></div>
+                </div>
+
+                <p style="font-size:0.85rem; margin-bottom:15px; color:var(--text);">
+                    Security logs indicate an integrity mismatch in the provided session token.
+                </p>
+
+                <div class="hint-section">
+                    <button class="hint-btn" id="hint-btn" onclick="getHint()">
+                        Unlock Hint (-20 Credits)
+                    </button>
+                    <div id="hint-output"></div>
+                </div>
+
+                <div class="footer">
+                    <a href="/" class="back-btn">&larr; Return to Login Portal</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let credits = 100;
+        let hintIndex = 0;
+        const hints = [
+            "Your session is controlled by a 'cookie'. Check your browser's storage.",
+            "The token format is Header.Payload.Signature.",
+        ];
+        function updateCredits() {
+            document.getElementById('credit-display').textContent = `Credits: ${credits}`;
+            const btn = document.getElementById('hint-btn');
+            if (hintIndex >= hints.length || credits < 20) {
+                btn.disabled = true;
+                btn.textContent = credits < 20 ? 'Insufficient Credits' : 'Hints Exhausted';
+            }
+        }
+        function getHint() {
+            if (credits < 20 || hintIndex >= hints.length) return;
+            credits -= 20;
+            const div = document.createElement('div');
+            div.style.cssText = "margin-top:8px; padding:8px; background:rgba(88,166,255,0.1); border:1px dashed var(--primary); border-radius:4px;";
+            div.innerHTML = `<strong>Hint ${hintIndex + 1}:</strong> ${hints[hintIndex]}`;
+            document.getElementById('hint-output').appendChild(div);
+            hintIndex++;
+            updateCredits();
+        }
+        updateCredits();
+    </script>
+</body>
+</html>
