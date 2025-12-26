@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Protocol: Null | Secure Gateway</title>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Roboto+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+    
     <style>
         :root {
             --bg: #0d1117;
@@ -221,7 +222,7 @@
                     <p style="margin-bottom:10px; font-size:0.8rem; color:var(--text);">
                         [DEBUG MODE DETECTED]
                     </p>
-                    <a href="/login/guest" class="override-link">
+                  <a id="guest-link" class="override-link">
                         &gt; INITIATE GUEST PROTOCOL
                     </a>
                 </div>
@@ -232,5 +233,28 @@
             </div>
         </div>
     </div>
+    <script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const params = new URLSearchParams(window.location.search);
+    const teamcodeParam = params.get("teamcode");
+
+    if (teamcodeParam) {
+      localStorage.setItem("teamcode", teamcodeParam);
+      params.delete("teamcode");
+      const cleanURL = window.location.pathname + (params.toString() ? "?" + params.toString() : "");
+      window.history.replaceState({}, document.title, cleanURL);
+      console.log("Teamcode saved:", teamcodeParam);
+    }
+
+    const teamcode = localStorage.getItem("teamcode");
+    const guestLink = document.getElementById("guest-link");
+
+    if (teamcode) {
+      guestLink.href = `/login/guest?teamcode=${teamcode}`;
+    } else {
+      guestLink.href = "/login/guest";
+    }
+  });
+</script>
 </body>
 </html>
