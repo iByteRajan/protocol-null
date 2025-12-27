@@ -90,7 +90,7 @@ app.get('/admin',authenticateToken,async (req, res) => {
     console.log("Stored in Main Backend:", result);
 
 
-  return res.redirect("https://your-website.com/dashboard");
+  return res.redirect("https://bug-hunt-manager-tau.vercel.app/level/694d39a21eea528e8a64289f/dashboard");
 
 
   } catch (error) {
